@@ -1,0 +1,87 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Teko&display=swap');
+
+.delagothic {
+    font-family: 'Staatliches', cursive;
+}
+.fjalla {
+  font-family: 'Teko', sans-serif;
+}
+.pink{
+  background-color: rgb(207, 22, 173);
+}
+.red{
+  background-color: rgb(214, 4, 4);
+  
+}
+.line{
+  width: 400px;
+}
+.backgroundstatic {
+  
+  background-image: linear-gradient(rgba(0, 0, 0, 0.650),rgba(0, 0, 0, 0.600)) ,url('https://i.gifer.com/xK.gif');
+  background-size: cover;
+  background-repeat: no-repeat;
+  
+  
+}
+
+
+
+@keyframes animation {
+  0% {
+    opacity: 0.7;
+    transform: skewX(-20deg) translate(0px, 0px)
+  }
+  
+  25% {
+    opacity: 0.1
+  }
+  
+  50% {
+    opacity: 0.5;
+    transform: skewX(-20deg) scale(1.5);
+  }
+  
+  75% {
+    
+  }
+
+  100%  {
+    opacity: 0.3;
+    transform: skewX(-20deg) scale(0.7) translate(150px, 200px);
+  }
+}
+.glass {
+  background: rgba(255, 143, 234, 0.15);
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+  backdrop-filter: blur( 11.5px );
+  -webkit-backdrop-filter: blur( 11.5px );
+  border-radius: 10px;
+
+
+}
+.background {
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+	background-size: 400% 400%;
+	animation: gradient 15s ease infinite;
+	/*height: 100vh;*/
+}
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+  
+  
+  
