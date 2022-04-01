@@ -1,6 +1,15 @@
 import React from 'react'
 import { useAddress, useDisconnect, useMetamask } from "@thirdweb-dev/react";
-function NFTDropPage() {
+import {useState, useEffect} from 'react';
+import { GetServerSideProps } from 'next';
+import { sanityClient, urlFor } from '../../sanity';
+import { Collection } from '../../typings'
+import Link from 'next/link';
+interface Props {
+    collection: Collection
+}
+
+function NFTDropPage({collection}: Props) {
 
     //Auth
 
@@ -9,26 +18,25 @@ function NFTDropPage() {
     const disconnect = useDisconnect();
     console.log(address);
 
-
   return (
     
     <div className="flex h-screen flex-col lg:grid lg:grid-cols-10 backgroundstatic">
         
-  
+       
 
         {/*left */}
         <div className="lg:col-span-4 glass">
             <div className="flex flex-col items-center justify-center py-2 lg:min-h-screen">
                 <div className="background p-2 rounded-xl">
                     <img className="w-44 rounded-xl object-cover lg:h-96 lg:w-72" 
-                    src="https://i.postimg.cc/2SfPh9fL/Bombard-1.jpg" alt=""/>
+                    src={urlFor(collection.previewImage).url()} alt=""/>
                 </div>
                 <div className="p-5 text-center space-y-2">
                     <h1 className="text-4xl font-bold text-white fjalla">
-                        BOMBARD ARTWORKS
+                        {collection.nftCollectionName}
                     </h1>
                     <h2 className="text-xl text-gray-300">
-                    A collection of Bombard's music artworks that will keep you energized and get you pumped every day!
+                    {collection.description}
                     </h2>
                     
                 </div>
@@ -49,6 +57,7 @@ function NFTDropPage() {
 
             {/*header */}
             <header  className="flex items-center justify-between">
+                <Link href={'/'}>
                 <h1 className="w-52 cursor-pointer text-3xl sm:w-80 font-extrabold py-2 text-white">
                     
                     <p className="line text-4xl "> 
@@ -64,6 +73,7 @@ function NFTDropPage() {
                      NFT Market Place
                     <img src="https://i.postimg.cc/ydsRRZ1z/The-Bombard-s-NFT-Market-Place-1.png"/>*/}
                 </h1>
+                </Link>
                 <button onClick={() => (address ? disconnect() : connectWithMetamask())} 
                 className="rounded-full pink text-white 
                 px-4 py-2 text-xs font-bold lg:px-5 lg:py-3 lg:text-base shadow-sm shadow-pink-900">
@@ -87,18 +97,63 @@ function NFTDropPage() {
 
 
 
-                <img className="w-80 object-cover pb-10 lg:h-60" src="https://i.postimg.cc/9QV4bXLB/K-perny-k-p-2022-03-31-205420.png" alt="" />
-                <h1 className="text-3xl font-bold lg:text-5xl lg:font-extrabold">BOMBARD FAN CLUB | NFT DROP</h1>
+                <img className="w-80 object-cover pb-10 lg:h-60" src={urlFor(collection.mainImage).url()} alt="" />
+                <h1 className="text-3xl font-bold lg:text-5xl lg:font-extrabold">{collection.title}</h1>
                 <p className="pt-2 text-xl text-green-500">1/5 NFT's claimed</p>
+                
             </div>
             {/*mint */}
             <button className="h-16 w-full red shadow-lg shadow-red-900 text-white rounded-full mt-10 font-bold">
                 Mint NFT (0.01 ETH)
             </button>
         </div>
+        
     </div>
     
   )
 }
 
 export default NFTDropPage
+
+export const getServerSideProps: GetServerSideProps = async ({params}) => {
+    const query = `*[_type == "collection" && slug.current == $id] [0] {
+        _id,
+        title,
+        address,
+        description,
+        nftCollectionName,
+        mainImage {
+        asset
+      },
+      previewImage {
+        asset
+      },
+      slug {
+        current
+      },
+      creator-> {
+        _id,
+        name,
+        address,
+        slug {
+        current
+      },
+      },
+      }`
+      
+      const collection = await sanityClient.fetch(query, {
+          id: params?.id
+      })
+
+      if(!collection) {
+          return {
+              notFound: true,
+          }
+      }
+
+      return {
+          props: {
+            collection,
+          },
+      }
+}
