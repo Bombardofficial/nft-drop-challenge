@@ -180,7 +180,7 @@ const mintNft = () => {
 
                 <a onClick={() => (address ? disconnect() : connectWithMetamask())} 
                 className=" pink text-white cta
-                 text-xs sizefix font-bold lg:px-5 lg:py-3 w-20 lg:w-60 lg:text-xl shadow-sm shadow-pink-900">
+                 text-xs sizefix font-bold lg:px-5 lg:py-3 w-20 lg:w-60 lg:text-xl shadow-sm shadow-pink-900 cursor-pointer">
                     <span>{address ? 'Sign Out' : 'Sign In'}</span>
                     <span>
                     <svg className="pr-10"width="66px" height="43px" viewBox="0 0 66 43" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
