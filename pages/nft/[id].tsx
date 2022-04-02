@@ -205,7 +205,7 @@ const mintNft = () => {
             </motion.div>
 
             {address && (
-            <p className="text-center text-md text-rose-300 font-italic">You're logged in with wallet {address.substring(0, 5)}..
+            <p className="text-center text-xl text-rose-300 font-italic">You're logged in with wallet {address.substring(0, 5)}..
             .{address.substring(address.length - 5)}
             </p>
             )}
@@ -281,7 +281,7 @@ const mintNft = () => {
                 ) : !address ? (
                     <>Sign in to Mint</>
                 ) : (
-                    <span className="font-bold">Mint NFT ({priceInEth} ETH)</span>
+                    <span className="font-bold">Mint NFT ( {priceInEth} ETH )</span>
                 )}
                 
                 
