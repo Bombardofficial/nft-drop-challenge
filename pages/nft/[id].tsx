@@ -7,6 +7,7 @@ import { Collection } from '../../typings'
 import Link from 'next/link';
 import { BigNumber } from 'ethers';
 import { motion } from "framer-motion"
+import toast, { Toaster } from 'react-hot-toast';
 
 
 interface Props {
@@ -58,6 +59,15 @@ const mintNft = () => {
     const quantity = 1;
 
     setLoading(true);
+    const notification =  toast.loading('Minting...', {
+        style: {
+            background: 'white',
+            color: 'green',
+            fontWeight: 'bolder',
+            fontSize: '17px',
+            padding: '20px',
+        }
+    })
 
     nftDrop.claimTo(address, quantity)
     .then(async (tx) => {
@@ -65,15 +75,37 @@ const mintNft = () => {
         const claimTokenId = tx[0].id;
         const claimedNFT = await tx[0].data();
 
+        toast('HOORAY.. You Successfully Minted!', {
+            duration: 8000,
+            style: {
+                background: 'white',
+                color: 'green',
+                fontWeight: 'bolder',
+                fontSize: '17px',
+                padding: '20px',
+            }
+
+        })
+
         console.log(receipt)
         console.log(claimTokenId)
         console.log(claimedNFT)
     })
     .catch((err) => {
-        console.log(err)
+        console.log(err);
+        toast('Whoops... Something went wrong!', {
+            style: {
+                background: 'red',
+                color: 'white',
+                fontWeight: 'bolder',
+                fontSize: '17px',
+                padding: '20px',
+            }
+        })
     })
     .finally(() => {
         setLoading(false);
+        toast.dismiss(notification)
     })
 }
 
@@ -82,7 +114,7 @@ const mintNft = () => {
     
     <div className="flex lg:h-screen flex-col lg:grid lg:grid-cols-10 backgroundstatic h-50 league">
         
-        
+        <Toaster position='top-left'/>
 
         {/*left */}
         <div className="lg:col-span-4 glass">
