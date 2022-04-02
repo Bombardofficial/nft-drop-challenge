@@ -40,13 +40,16 @@ function NFTDropPage({collection}: Props) {
                     </h2>
                     
                 </div>
-                <iframe 
-                        className="rounded-lg" 
-                        src="https://open.spotify.com/embed/track/4gNzzCqaoePJzKxN7NzHlO?utm_source=generator&theme=0" 
-                        width="60%" height="80" frameBorder="0"  
-                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
+                {collection.nftCollectionName  === 'Agile Lego Figures' || collection.nftCollectionName  === 'PAPAFAM Apes'? (
+                    <iframe className="rounded-lg" src="https://open.spotify.com/embed/track/1WxfLem16KNzd29dtLwJcE?utm_source=generator" width="50%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+                ) : (<iframe 
+                    className="rounded-lg" 
+                    src="https://open.spotify.com/embed/track/4gNzzCqaoePJzKxN7NzHlO?utm_source=generator&theme=0" 
+                    width="60%" height="80" frameBorder="0"  
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
 
-                </iframe>
+                </iframe>)}
+                
             </div>
             
         </div>

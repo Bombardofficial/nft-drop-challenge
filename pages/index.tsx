@@ -52,8 +52,8 @@ const Home = ({ collections }: Props) => {
         </h1>
 
 
-        <main className="bg-slate-100 p-10 shadow-xl shadow-rose-400/20 max-w-7xl pb-5 glass">
-        <div className="grid space-x-3 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 justify-center">
+        <main className="bg-slate-100 p-10 shadow-xl shadow-rose-400/20 max-w-7xl pb-0 glass h-screen">
+        <div className="grid space-x-3 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3 justify-center content-center pb-0 ">
           {collections.map(collection => (
             <Link href={`/nft/${collection.slug.current}`}>
             <div className="flex flex-col items-center cursor-pointer transition-all duration-200 hover:scale-105">
@@ -61,7 +61,7 @@ const Home = ({ collections }: Props) => {
               <img className="h-96 w-60 rounded-2xl object-cover" src={urlFor(collection.mainImage).url()} alt="" />
 
               <div className="p-5">
-                <h2 className="text-3xl">{collection.title}</h2>
+                <h2 className="text-3xl font-bold text-white">{collection.title}</h2>
                 <p className="mt-2 text-sm text-gray-400">{collection.description}</p>
               </div>
             </div>
